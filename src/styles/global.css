@@ -16,16 +16,6 @@
   --black: rgba(15, 18, 25, 1);
 }
 
-:root.dark {
-  --main-color: rgba(223, 223, 214, 1);
-  --main-hover-color: rgba(255, 255, 255, 1);
-  --gray-color: rgba(147, 157, 163, 1);
-  --raw-bg-color: rgba(101, 117, 133, 0.16);
-  --main-bg-color: rgba(33, 39, 55, 1);
-  --nav-bg-color: rgba(33, 39, 55, 1);
-  --accent: rgba(207, 130, 158, 1);
-  --accent-dark: rgba(207, 130, 158, 0.7);
-}
 
 body {
   --vp-font-family-base: "Source Sans Pro", "Source Sans Pro Variable", "Noto Sans SC",
