@@ -216,30 +216,16 @@ nav a:hover,
 .theme-icon {
   cursor: pointer;
 }
-.dark .theme-icon.light {
-  display: block;
-}
-.dark .theme-icon.dark {
-  display: none;
-}
+
 .theme-icon.light {
   display: none;
 }
-.theme-icon.dark {
-  display: block;
-}
-.dark .code-image.themed .light {
-  display: none;
-}
-.dark .code-image.themed .dark {
-  display: initial;
-}
+
+
 .code-image.themed .light {
   display: initial;
 }
-.code-image.themed .dark {
-  display: none;
-}
+
 
 figcaption {
   text-align: center;
@@ -610,17 +596,6 @@ header nav {
   }
 }
 
-/* Dark mode enhancements */
-:root.dark header {
-  background: rgba(33, 39, 55, 0.8);
-  border-bottom-color: rgba(255, 255, 255, 0.1);
-}
-
-:root.dark .nav-link:hover {
-  box-shadow: 
-    0 4px 12px rgba(var(--accent), 0.2),
-    0 2px 4px rgba(var(--accent), 0.15);
-}
 
 /* Smooth scroll behavior when navigating */
 @media (prefers-reduced-motion: no-preference) {
