@@ -28,3 +28,6 @@ Typst syntax hightlight are specially handled internally:
 ```typ
 #let f(x) = x;
 ```
+
+
+$a in RR$

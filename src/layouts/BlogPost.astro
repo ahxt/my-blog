@@ -1,15 +1,11 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import { getCollection } from "astro:content";
 
-import { PostClick } from "@myriaddreamin/tylant";
 import { TagList } from "@myriaddreamin/tylant";
 
 import BaseHead from "$components/BaseHead.astro";
 import Header from "$components/Header.astro";
 import Footer from "$components/Footer.astro";
-import FormattedDate from "$components/FormattedDate.astro";
-import { kEnableClick, kArticleStats, kEnableReaction } from "$consts";
 
 interface IdExt {
   id: string;
@@ -19,13 +15,6 @@ type Props = CollectionEntry<"blog">["data"] & (IdExt | { id: false });
 
 const { id, title, description, date, updatedDate, tags, author, ...rest } =
   Astro.props;
-const stat: { like?: number; click?: number } =
-  ((kEnableClick || kEnableReaction) &&
-    kArticleStats.find((stat) => stat.id === id)) ||
-  {};
-const click = stat.click || 0;
-const like = stat.like || 0;
-const pdfArchives = await getCollection("archive");
 ---
 
 <html lang="en">
@@ -38,7 +27,6 @@ const pdfArchives = await getCollection("archive");
         margin: 0;
       }
       .prose,
-      .comment-region,
       ul.tags {
         max-width: min(56rem, calc(100% - 2em));
         color: var(--main-color);
@@ -114,7 +102,6 @@ const pdfArchives = await getCollection("archive");
         margin-left: 4em;
       }
     </style>
-    {id && kEnableClick && <PostClick id={id} />}
   </head>
 
   <body>
@@ -125,38 +112,30 @@ const pdfArchives = await getCollection("archive");
           <section class="title" aria-label="Title">
             <div class="annotation">
               <div class="date">
-                <FormattedDate date={date} />
+                <time datetime={date.toISOString()}>
+                  {date.toLocaleDateString("en-us", {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                  })}
+                </time>
                 {
                   updatedDate && (
                     <>
                       <span class="last-updated-on">
                         , Last updated on{" "}
-                        <FormattedDate date={updatedDate || date} />
+                        <time datetime={(updatedDate || date).toISOString()}>
+                          {(updatedDate || date).toLocaleDateString("en-us", {
+                            year: "numeric",
+                            month: "short",
+                            day: "numeric",
+                          })}
+                        </time>
                       </span>
                     </>
                   )
                 }
               </div>
-              {
-                id && kEnableClick && (
-                  <>
-                    <span>·</span>
-                    <div class="click-count">
-                      {click} {click === 1 ? "view" : "views"}
-                    </div>
-                  </>
-                )
-              }
-              {
-                id && kEnableReaction && (
-                  <>
-                    <span>·</span>
-                    <span class="like-count">
-                      {like} {like === 1 ? "like" : "likes"}
-                    </span>
-                  </>
-                )
-              }
             </div>
             <h1>{title}</h1>
             <hr />
@@ -166,6 +145,6 @@ const pdfArchives = await getCollection("archive");
       </article>
       {tags && <TagList tags={tags} />}
     </main>
-    <Footer />
+    <!-- <Footer /> -->
   </body>
 </html>
